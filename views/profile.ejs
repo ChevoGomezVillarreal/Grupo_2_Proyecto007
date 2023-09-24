@@ -6,7 +6,7 @@
     <body>
         <%- include('./partials/header') %>
         <main>
-            <% if(locals.userData && userData.nombre) { %>
+            <% if(locals.userData && userData.NOMBRE) { %>
                 <div class="profile-div-h2">
                     <h2>Perfil del miembro</h2>
                 </div>
@@ -15,50 +15,54 @@
                         <p>Nombre del miembro:</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.nombre %></p>
+                        <p><%= userData.NOMBRE %></p>
                     </div> 
                     <div class="profile-div-black">
                         <p>Apellido del miembro:</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.apellido %></p>
+                        <p><%= userData.APELLIDO %></p>
                     </div>   
                     <div class="profile-div-black">
                         <p>Nombre de usuario:</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.usuario %></p>
+                        <p><%= userData.USUARIO %></p>
                     </div> 
                     <div class="profile-div-black">
                         <p>Correo electronico:</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.email %></p>
+                        <p><%= userData.EMAIL %></p>
                     </div>   
                     <div class="profile-div-black">
                         <p>Fecha de nacimiento</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.nacimiento %></p>
+                        <p><%= userData.FECHA_NACIMIENTO %></p>
                     </div>   
                     <div class="profile-div-black">
                         <p>Domicilio</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.domicilio %></p>
+                        <p><%= userData.DOMICILIO %></p>
                     </div>  
                     <div class="profile-div-black">
                         <p>Pais</p>
                     </div>
                     <div class="profile-div-white">
-                        <p><%= userData.pais %></p>
+                        <p><%= userData.PAIS %></p>
                     </div>  
                                                                                                                                    
                 </div>
                 <div class="profile-div-h2">
+                    <form action="/users/profileEdit" method="GET">
+                        <button type="submit" class="but-submit">Editar informacion de usuario</button><br>
+                    </form>      
                     <form action="/users/logout" method="GET">
                         <button type="submit" class="but-submit">Salir</button><br>
                     </form>
+              
                 </div>                
             <% } else { %>
                 <div class="profile-div-h2">

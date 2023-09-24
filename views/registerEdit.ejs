@@ -17,12 +17,11 @@
                     </ul>
                 </div>
             <% } %> 
-                  
-            <form action="/users/processRegister" method="POST" class="form-reg-user">
+            <form action="/users/processRegisterEdit/<%= oldData.ID %>/?_method=PUT" method="POST" class="form-edit-user">
                 <div id="variables-escondidas-div" style="display:none">
                     <% if(typeof oldData != 'undefined') { %>
                         
-                            <input name = "pais_nombre" id="variables-escondidas-pais" value="<%= oldData.PAIS_NOMBRE %>">
+                            <input name = "pais_nombre" id="variables-escondidas-pais" value="<%= oldData.PAIS %>">
                             <input name= "pais_index" id="variables-escondidas-pais-index" value="<%= oldData.PAIS_INDEX %>">
     
                     <% } else { %>
@@ -345,27 +344,14 @@
                 <br>                
                 <hr>
                 <br>
-                <label class="regular-label">Contrasena</label><br>
-                <input type="password" name="pass1" class="regular-text"
-                <% if(typeof oldData != 'undefined') { %>
-                    value=""
-                <% } else { %>
-                    value=""    
-                <% } %>                
-                ><br>
-                <label class="regular-label">Confirmar Contrasena</label><br>
-                <input type="password" name="pass2" class="regular-text"
-                <% if(typeof oldData != 'undefined') { %>
-                    value=""
-                <% } else { %>
-                    value=""    
-                <% } %>                  
-                ><br>
                 <br>
                 <hr>
                 <br>                
-                <button type="submit">Registrar</button><br>
-                <button type="reset">Borrar</button><br>
+                <button type="submit">Guardar</button><br>
+                
+            </form>
+            <form action="/users/profile" method="GET" class="form-edit-user">
+                <button type="submit">Cancelar</button><br>
             </form>
         </main>
         <%- include('./partials/footer') %>       
@@ -378,11 +364,19 @@
                 }  else {
                     //alert('Entre a primera carga');
                 }  
+
+                let list = document.getElementById("country").options;
+                for( i=0 ; i < list.length; i++ ){
+                    if(list[i].text == document.getElementById("variables-escondidas-pais").value){
+                        list.selectedIndex = i;
+                        return;
+                    }
+                }
             })
 
             function getPais(){
-                var index = document.getElementById("country").selectedIndex;
-                var list = document.getElementById("country").options;
+                let index = document.getElementById("country").selectedIndex;
+                let list = document.getElementById("country").options;
                 //alert("Index: " + list[index].index + " is " + list[index].text);
                 document.getElementById("variables-escondidas-pais").value = list[index].text;
                 document.getElementById("variables-escondidas-pais-index").value = list[index].index;

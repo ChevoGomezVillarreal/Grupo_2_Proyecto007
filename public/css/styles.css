@@ -101,12 +101,20 @@ a {
     
 }
 
-.form-reg-user {
+.form-reg-user  {
     /*text-align: center;*/
     width: 80%;
     margin: auto;
     max-width: 400px;
 }
+
+.form-edit-user {
+    /*text-align: center;*/
+    width: 80%;
+    margin: auto;
+    max-width: 400px;
+}
+
 
 .form-reg-user  {
     .label {

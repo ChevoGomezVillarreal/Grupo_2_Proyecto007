@@ -3,14 +3,38 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 
+const db = require('../../database/models');
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
+const moment = require('moment');
+
+
+//Aqui tienen otra forma de llamar a cada uno de los modelos
+const Productos = db.Producto;
+//const Genres = db.Genre;
+//const Actors = db.Actor;
+
 /*let motos = mainController.leerJSON("motos.json");
 res.render(path.resolve(__dirname,"../views/admin/administrar.ejs"), {motos: motos});*/
 
 module.exports = {
     
     index: (req, res)=>{
+        /*
         let inventario = fs.readFileSync(path.resolve(__dirname,'../../database/productos.json'));
         inventario = JSON.parse(inventario);
+        */
+       let inventario = [];
+       console.log('Db producto = ' + db.Producto);
+
+        Productos.findAll()
+            .then(productos => {
+                //res.render('moviesList.ejs', {productos})
+
+                console.log('Productos = ' + JSON.stringify(productos));
+                console.log('Productos length = ' + productos.length);
+                res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario: productos});
+            })       
         let temp = {};
         console.log("Vista de listado de productos");
         console.log("El tamano del inventario es: " + inventario.length)
@@ -27,15 +51,21 @@ module.exports = {
         });
         */
         //console.log(inventario);
-        res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario});
+        //res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario});
 
     },
 
     create: (req, res) => {
         res.render(path.resolve(__dirname,"../../views/productCreate.ejs"));
+     
     },
 
+  
+
     savenew: (req,res) => {
+
+  
+
         console.log('Entrando a save new');
         
         console.log('nombre = ' + req.body.nombre);
@@ -52,9 +82,31 @@ module.exports = {
             image: prodImage,
             price: Number(req.body.costo)
         };
+
+        Productos
+        .create(
+            {
+                /*
+                title: req.body.title,
+                rating: req.body.rating,
+                awards: req.body.awards,
+                release_date: req.body.release_date,
+                length: req.body.length,
+                genre_id: req.body.genre_id
+                */
+                //ID: 100,
+                NOMBRE: req.body.nombre.trim(),
+                DESCRIPCION: req.body.descripcion.trim(),
+                IMAGEN: prodImage,
+                PRECIO: Number(req.body.costo)               
+            }
+        )
+        .then(()=> {
+            return res.redirect('/products')})            
+        .catch(error => res.send(error))           
         
         //newProd = JSON.stringify(newProd);
-
+        /*
         let inventario = fs.readFileSync(path.resolve(__dirname,'../../database/productos.json'));
         inventario = JSON.parse(inventario);
         
@@ -84,5 +136,7 @@ module.exports = {
         //res.send('Producto agregado');
         inventario = JSON.parse(inventario);
         res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario});
+        */
     }
+    
 }
