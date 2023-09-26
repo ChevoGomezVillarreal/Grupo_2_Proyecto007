@@ -23,3 +23,20 @@
 
 ## Que debeos hacer menos:
 ## Tratar de reducir los conflictos de codigo diferente
+
+## Conclusiones del 6to sprint
+
+## Que hacemos bien:
+## Mauricio y Eusebio tenemos un buen entendimiento de la tecnologia
+## Hemos podido completar todos los pasos del sprint
+## Hemos logrado conectar el sistema a la base de datos MySql y ya no utilizamos archivos de texto json
+
+## Que debemos hacer mas:
+## Organizarnos mejor para hacer las tareas en conjunto
+
+## Que hacemos mal:
+## Sincronizarnos
+
+## Que debemos hacer menos:
+## Trabajar por separado
+
