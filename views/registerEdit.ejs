@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <%- include('./partials/head') %>
+    <head>
+        <%- include('./partials/head') %>
+        <script type="text/javascript" src="/js/userRegisterEdit.js"></script>
+    </head>
     <body class="body-page-register">       
         <%- include('./partials/header') %>
 
@@ -354,9 +357,10 @@
                 <button type="submit">Cancelar</button><br>
             </form>
         </main>
-        <%- include('./partials/footer') %>       
-        <script>
-
+        <%- include('./partials/footer') %>
+        <!--<script src="/js/userRegisterEdit.js">--> 
+        <script>      
+            /*
             document.addEventListener("DOMContentLoaded",function(){
                 if(document.getElementById("variables-escondidas-pais").value!="PRIMERA-CARGA"){
                     //alert('Entre a algo diferente a primera carga');
@@ -381,6 +385,7 @@
                 document.getElementById("variables-escondidas-pais").value = list[index].text;
                 document.getElementById("variables-escondidas-pais-index").value = list[index].index;
             }
+            */
         </script>
     </body>
 </html>

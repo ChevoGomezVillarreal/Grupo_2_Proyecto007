@@ -2,11 +2,18 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require("multer");
+const { check, validationResult, body } = require('express-validator');
 
 const currentPath = path.resolve(__dirname,'../controllers/chevo/productController.js');
 
 const controllersAdminProdChevo = require(currentPath);
 const productController = require(path.resolve(__dirname,'../controllers/mauricio/productController'));
+
+const validaciones = [
+    body('nombre').notEmpty().withMessage('El nombre no puede estar vacio'),
+    body('descripcion').notEmpty().withMessage('El apellido no puede estar vacio'),
+    body('costo').notEmpty().withMessage('El nombre de usuario no puede estar vacio')
+];
 
 //Uso de multer para almacenamiento de imagenes 
 const multerDiskStorage = multer.diskStorage(

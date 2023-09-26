@@ -6,30 +6,30 @@
   <body>
     <%- include('./partials/header') %>
     <main>       
-        <form action="/products/<%=producto.id%>/?_method=PUT" method="POST" class="formProductCreate"clear enctype="multipart/form-data">
+        <form action="/products/<%= producto.ID %>/?_method=PUT" method="POST" class="formProductCreate"clear enctype="multipart/form-data">
             <h3 class="headerDescripcionDelProducto">Edición de producto</h3>
-            <input type="text" name="name" placeholder="Nombre del producto" class="formProductCreateEditTextInput" value="<%=producto.name%>">
+            <input type="text" name="name" placeholder="Nombre del producto" class="formProductCreateEditTextInput" value="<%= producto.NOMBRE %>">
             <br>
             <textarea name="description" rows="12" cols="50" class="formProductCreateEditTextInput" placeholder="Descripción del producto">
               <% if (producto.description !== null) {%>
-                      <%=producto.description%>
+                      <%= producto.DESCRIPCION %>
               <% }else{ %>
                       "Descripción del producto ...";
               <% } %>               
             </textarea>            
             <br>
             <input type="number" name="price" class="formProductCreateEditTextInput" placeholder="Precio del producto"
-                value="<%=producto.price%>"> 
+                value="<%= producto.PRECIO %>"> 
             
-            <img src="/images/productos/<%=producto.image%>" alt="<%=producto.name%>"/>
-            <input type="hidden" name="oldImage" value="<%=producto.image%>">
-            <input type="file" name="imagenProducto" id="image" class="formProductCreateEditTextInput" value="<%=producto.image%>" >
+            <img src="/images/productos/<%= producto.IMAGEN %>" alt="<%= producto.NOMBRE %>"/>
+            <input type="hidden" name="oldImage" value="<%= producto.IMAGEN %>">
+            <input type="file" name="imagenProducto" id="image" class="formProductCreateEditTextInput" value="<%= producto.IMAGEN %>" >
            
             <br>            
             <br>                
             <button type="submit">Guardar</button><br>            
         </form>
-        <form action="/products/<%=producto.id%>/?_method=DELETE" method="POST" class="formProductCreate">
+        <form action="/products/<%= producto.ID %>/?_method=DELETE" method="POST" class="formProductCreate">
           <button type="submit">Borrar producto</button><br>
         </form>
     </main>

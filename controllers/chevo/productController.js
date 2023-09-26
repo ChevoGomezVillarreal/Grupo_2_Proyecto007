@@ -24,8 +24,8 @@ module.exports = {
         let inventario = fs.readFileSync(path.resolve(__dirname,'../../database/productos.json'));
         inventario = JSON.parse(inventario);
         */
-       let inventario = [];
-       console.log('Db producto = ' + db.Producto);
+        console.log("Vista de listado de productos");
+        let inventario = [];
 
         Productos.findAll()
             .then(productos => {
@@ -35,9 +35,8 @@ module.exports = {
                 console.log('Productos length = ' + productos.length);
                 res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario: productos});
             })       
-        let temp = {};
-        console.log("Vista de listado de productos");
-        console.log("El tamano del inventario es: " + inventario.length)
+
+
         /*
         let counter = 0;
         inventario.forEach(element => {

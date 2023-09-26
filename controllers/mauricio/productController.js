@@ -2,33 +2,66 @@ const express = require('express');
 const fs = require("fs");
 const path = require('path');
 
+const db = require('../../database/models');
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
+const moment = require('moment');
+
+
+//Aqui tienen otra forma de llamar a cada uno de los modelos
+const Productos = db.Producto;
+//const Genres = db.Genre;
+//const Actors = db.Actor;
+
 productController = {
 
     details: (req, res) => {
         console.log("Product details ...");
+
+        /*
         let idProducto = parseInt(req.params.id);
         let productos = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../database/productos.json")));
 
         let producto = productos.find((producto) => {
             return producto.id === idProducto ? true : false;
         });
-
-        res.render("productDetails", {producto});
+        */
+        db.Producto.findOne(
+            {
+                where: {ID: req.params.id }
+            }
+            )
+            .then( data => {
+                res.render("productDetails", {producto: data});
+            })
+        
     },
 
     getById: (req, res) => {
+
+        /*
         let idProducto = parseInt(req.params.id);
         let productos = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../database/productos.json")));
 
         let producto = productos.find((producto) => {
             return producto.id === idProducto ? true : false;
         });
+        */
 
         //console.log(producto);
 
         //res.render(path.resolve(__dirname,"../views/admin/administrar.ejs"), {motos: motos});
         console.log("Renderizando vista de edicion de productos");
-        res.render("productEdit", { producto });
+        db.Producto.findOne(
+            {
+                where: {ID: req.params.id }
+            }
+            )
+            .then( data => {
+                //res.render("productDetails", {producto: data});
+                res.render("productEdit", { producto:data });
+            })
+            
 
     },
     
@@ -36,34 +69,58 @@ productController = {
 
         let idProducto = parseInt(req.params.id);
         console.log("Actualizacion del producto -> Id obtenido del producto -> " + idProducto);
-        let productos = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../database/productos.json")));
+        
+        //let productos = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../database/productos.json")));
 
+        /*
         let producto = productos.find((p) => {
             return p.id === idProducto ? true : false;
         });
+        */
 
         console.log("Nombre de producto obtenido para la actualizacion: " + req.body.name);
         console.log("Descripcion de producto obtenido para la actualizacion: " + req.body.description.trim());        
-        //obtenemos la imagen y la adicinamos tambien al request. Se hace if en caso de que la imagen no sea
+        //obtenemos la imagen y la adicionamos tambien al request. Se hace if en caso de que la imagen no sea
         //actualizada y por lo tanto no se cargue nada.
+
         let prodImage = req.file ? req.file.filename : req.body.oldImage;
         console.log("Valor de req.body.imagen = " + req.body.imagen);
-        //TOoDo adicional validaciones        
+
+        //TOoDo adicional validaciones   
+        /*     
         producto.name = req.body.name;
         producto.description = req.body.description.trim();
         producto.price = req.body.price;
         producto.image = prodImage;//req.body.imagen;       
-
+        */
        
         //Escribir en el archivo JSON
-        let archivoProductosActualizado = JSON.stringify(productos, null, 2);
+        //let archivoProductosActualizado = JSON.stringify(productos, null, 2);
         //console.log(archivoProductosActualizado);
-        fs.writeFileSync(path.resolve(__dirname, "../../database/productos.json"), archivoProductosActualizado);
+        //fs.writeFileSync(path.resolve(__dirname, "../../database/productos.json"), archivoProductosActualizado);
         
-        console.log("Producto actualizado correctamente.");
-        //res.render("productEdit", { producto });
-        //ToDo redireccionar a la vista de listado de productos
-        res.redirect("/");
+        
+
+        db.Producto.update(
+            {
+                NOMBRE: req.body.name,
+                DESCRIPCION : req.body.description.trim(),
+                PRECIO : req.body.price,
+                IMAGEN : prodImage //req.body.imagen;                   
+            },
+            {
+                where:{ID: req.params.id}
+            }
+        )
+            .then(response => {
+                
+                console.log("Producto actualizado correctamente.");
+                //return res.redirect('/users/profile');
+                return res.redirect("/");
+                    
+            })
+            .catch(error => res.send(error))
+        
 
     },
 

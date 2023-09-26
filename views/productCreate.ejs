@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <%- include('./partials/head') %>
+  <head>
+    <%- include('./partials/head') %>
+    <script type="text/javascript" src="/js/imagePreview.js"></script>
+  </head>
   <body>
     <%- include('./partials/header') %>
     <main>
@@ -16,7 +19,7 @@
             <br>
             <h3>Foto del producto</h3>
             <!--<img src="/images/productos/logo-2.png" class="imagenAdicionalDelProducto" />-->
-            <img src="/images/logo-2.png" />
+            <img src="/images/logo-2.png" id="image-display"/>
             <input type="hidden" name="oldImage" value="/images/logo-2.png">
             <input type="file" name="imagenProducto" id="image" class="formProductCreateEditTextInput" value="/images/logo-2.png" >
 

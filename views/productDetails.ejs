@@ -16,7 +16,7 @@
               <div class="divLeftArrowArticuloImagenPrincipalProducto">
                 <i class="fa-regular fa-square-caret-left iconoFlecha"></i>
               </div>
-              <img src="/images/productos/<%=producto.image%>" class="imagenPrincipalDelProducto" />
+              <img src="/images/productos/<%= producto.IMAGEN %>" class="imagenPrincipalDelProducto" />
               <div class="divRightArrowArticuloImagenPrincipalProducto">
                 <i class="fa-regular fa-square-caret-right iconoFlecha"></i>
               </div>
@@ -24,13 +24,13 @@
             <!--Sección imagenes pequeñas del producto-->
             <section class="seccionImagenesAdicionalesProducto">
               <article class="articuloImagenAdicionalProducto">
-                <img src="/images/productos/<%=producto.image%>" class="imagenAdicionalDelProducto" />
+                <img src="/images/productos/<%= producto.IMAGEN %>" class="imagenAdicionalDelProducto" />
               </article>
               <article class="articuloImagenAdicionalProducto">
-                <img src="/images/productos/<%=producto.image%>" class="imagenAdicionalDelProducto" />
+                <img src="/images/productos/<%= producto.IMAGEN %>" class="imagenAdicionalDelProducto" />
               </article>
               <article class="articuloImagenAdicionalProducto">
-                <img src="/images/productos/<%=producto.image%>" class="imagenAdicionalDelProducto" />
+                <img src="/images/productos/<%= producto.IMAGEN %>" class="imagenAdicionalDelProducto" />
               </article>
             </section>
           </section>
@@ -40,14 +40,14 @@
             <section class="seccionDescripcionDelProducto">
               <header class="headerDescripcionDelProducto">
                 <h1>
-                  <%=producto.name%>
+                  <%= producto.NOMBRE %>
                 </h1>
               </header>
               <!--articulo para describir el producto-->
               <article class="articuloDescripcionDelProducto">
                 <p>
-                  <% if (producto.description !==null) {%>
-                    <%=producto.description%>
+                  <% if (producto.DESCRIPCION !==null) {%>
+                    <%= producto.DESCRIPCION %>
                       <% }else{ %>
                         "Descripción del producto ...";
                         <% } %>
@@ -55,7 +55,7 @@
               </article>
               <!--Precion del producto-->
               <article class="articlePrecioProducto">
-                <%=producto.price%>
+                <%= producto.PRECIO %>
               </article>
             </section>
             <!--sección de adicionar a tarjeta-->

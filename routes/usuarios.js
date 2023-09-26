@@ -18,9 +18,9 @@ const validaciones = [
     body('pais').not().isIn(['Seleccionar pais','']).withMessage('No hay pais seleccionado'),
     
     body('pass1').notEmpty().withMessage('Contrasena 1 vacia'),
-    //body('pass1').isLength({min:8}).withMessage('La contrasena tiene que contener minimo 8 caracteres'),
+    body('pass1').isLength({min:8}).withMessage('La contrasena tiene que contener minimo 8 caracteres'),
     body('pass2').notEmpty().withMessage('Contrasena 2 vacia'),
-    //body('pass2').isLength({min:8}).withMessage('La contrasena de confirmacion tiene que contener minimo 8 caracteres'),
+    body('pass2').isLength({min:8}).withMessage('La contrasena de confirmacion tiene que contener minimo 8 caracteres'),
     
     /** Validar que la contraseña coincide con la contraseña de control */
     body("pass1").custom ( (value, { req }) => {            
