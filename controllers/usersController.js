@@ -19,7 +19,11 @@ const Usuarios = db.Usuario;
 const usersController = {
     //seccion para registrar nuevos usuarios - mostrar la vista
     register: function(req,res) {
-        return res.render('register');
+        if(req.session.usuarioLogueado) {
+            return res.render('profile', {userData: req.session.usuarioLogueado});
+        } else {
+            return res.render('register');
+        }
     },
     //seccion para registrar nuevos usuarios - procesar el registro cuando dan click a REGISTRAR
     processRegister: function(req,res) {
@@ -120,7 +124,11 @@ const usersController = {
 
     //seccion para hacer login - mostrar la vista
     login: function(req,res) {
-        return res.render('login');
+        if(req.session.usuarioLogueado) {
+            return res.render('profile', {userData: req.session.usuarioLogueado});
+        } else {
+            return res.render('login');
+        }        
     },
     //seccion para hacer login - cuando el usuario da click en LOGIN
     processLogin: function(req,res) {

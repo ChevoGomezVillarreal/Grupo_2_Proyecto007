@@ -38,7 +38,7 @@
 /*Estilos sección de imágenes del producto*/
 .seccionImagenesDelProducto {
   /*width: 40%;*/
-  max-width: 550px;
+  /*max-width: 550px;*/
   /*border: dotted 2px red;*/
   border: solid 4px gainsboro;
 }
@@ -118,7 +118,7 @@
 
 /*Estilos sección de descrición y pagos del producto*/
 .seccionDescripcionYAddToCartDelPropducto {
-  max-width: 800px;
+  max-width: 550px;
   padding: 0px 10px 10px 10px;
   margin-left: 10px;
   /*border: dotted 2px red;*/
@@ -162,6 +162,14 @@
 
 .articuloAdicionarATarjeta {
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.articuloAdicionarATarjeta input {
+  width: 30%;
+  height: 30px;
   text-align: center;
 }
 
@@ -171,6 +179,7 @@
   border-radius: 5px;
   background-color: black;
   color: white;
+  width: 30%;
 }
 
 .boton {
@@ -182,6 +191,42 @@
   color: white;
 }
 
+
+@media (max-width: 600px) {
+  
+  .seccionDescripcionYAddToCartDelPropducto {
+    width: 100%;
+  }
+
+  .seccionImagenesDelProducto {
+    width: 100%;
+  }  
+  
+}
+
+@media (min-width: 601px) {
+  
+  .seccionDescripcionYAddToCartDelPropducto {
+    max-width: 550px;
+  }
+
+  .seccionImagenesDelProducto {
+    max-width: 550px;
+  }  
+  
+}
+
+@media (min-width: 900px) {
+  
+  .seccionDescripcionYAddToCartDelPropducto {
+    max-width: 450px;
+  }
+
+  .seccionImagenesDelProducto {
+    max-width: 450px;
+  }  
+  
+}
 
 
 /* Navegación en desktops */
@@ -196,5 +241,10 @@
       box-shadow: 0px 0px 10px rgb(199, 199, 199);
   }
 
+    /*
+    .seccionDescripcionYAddToCartDelPropducto {
+      width: 50%;
+    }
+    */
   
 }
