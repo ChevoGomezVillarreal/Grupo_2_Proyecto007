@@ -71,7 +71,9 @@
               </article>
               <article class="articuloAdicionarATarjeta">
                 <button class="boton" id="but-add-art">ADD TO CART</button>
-                <button class="boton">VIEW CART</button>
+                <form action="/carrito" method="GET">
+                  <button type="submit" class="boton" id="but-carrito">VIEW CART</button>
+                </form>
               </article>
               <div style="display:none">
                   <input type="text" value="<%= producto.ID %>" id="producto-id"></input>

@@ -18,6 +18,20 @@
     border: solid 4px gainsboro;
   }
 
+  .seccionCartHeader {
+    /*font-size: 20px;*/
+    color:white;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    max-width: 800px;
+    padding: 10px 10px 10px 10px;
+    margin: auto;
+    /*border: dotted 2px red;*/
+    justify-content: space-evenly;
+    border: solid 4px gainsboro;    
+  }
+
   .cartTableCell {
     border: 2px double black;
     
@@ -25,10 +39,34 @@
 
   .cartTableCellDesc {
     width: 70%;
+    
+  }
 
+  .cartTableCellDescL1 {
+    font-size: 20px;
   }
 
   .cartTableCellPrecio {
     width: 15%;
 
+  }
+
+  .col1 {
+    width: 55%;
+  }
+
+  .col2 {
+    width: 15%;
+  }
+
+  .col3 {
+    width: 15%;
+  }
+
+  .col4 {
+    width: 15%;
+  }
+
+  @media screen (max-width:600px) {
+  
   }

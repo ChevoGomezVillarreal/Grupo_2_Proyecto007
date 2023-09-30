@@ -201,6 +201,10 @@
   .seccionImagenesDelProducto {
     width: 100%;
   }  
+
+  .seccionCartHeader {
+    font-size: 10px;  
+  }  
   
 }
 
@@ -225,7 +229,9 @@
   .seccionImagenesDelProducto {
     max-width: 450px;
   }  
-  
+
+
+
 }
 
 

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded',function(event){
     let botonArticuloNuevo = document.querySelector('#but-add-art');
     let botonSumar = document.querySelector('#boton-sumar');
     let botonRestar = document.querySelector('#boton-restar');
+    let botonCarrito = document.querySelector('#but-carrito');
 
     botonArticuloNuevo.addEventListener('click',function(event){
         

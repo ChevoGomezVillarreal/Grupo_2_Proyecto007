@@ -9,14 +9,21 @@
     </header>
     <main>
         <h1 class="headerDescripcionDelProducto headerPrincipal"><br>CARRITO DE COMPRAS<br><br></h1>
+        <section class="seccionCartHeader">
+            <header class="col1">PRODUCTO</header>            
+            <header class="col2">PRECIO</header>
+            <header class="col3">CANTIDAD</header>
+            <header class="col4">TOTAL</header>
+        </section>
         <section class="seccionCartL1">
+
             <!--sección de descripción del producto-->
-            <section class="seccionDescripcionDelProducto cartTableCell cartTableCellDesc">
+            <section class="seccionDescripcionDelProducto cartTableCell col1">
                 <!--header para el nombre del producto-->
-              <header class="headerDescripcionDelProducto">
-                <h1 id="producto-nombre">
+              <header class="headerDescripcionDelProducto cartTableCellDescL1">
+                <p id="producto-nombre">
                     PRODUCTO MUESTRA
-                </h1>
+                </p>
               </header>
               <!--articulo para describir el producto-->
               <article class="articuloDescripcionDelProducto">
@@ -26,14 +33,17 @@
               </article>
             </section>
             <!--Precion del producto-->
-            <article class="articlePrecioProducto cartTableCell cartTableCellPrecio">
+            <article class="articlePrecioProducto cartTableCell col2">
                 <p style="display:inline">$</p>
                 <p id="producto-precio" style="display:inline">123</p>
             </article>    
-            <article class="articlePrecioProducto cartTableCell cartTableCellPrecio">
-                <p style="display:block">Cant. </p>
-                <p id="producto-precio" style="display:inline">10</p>
-            </article>                     
+            <article class="articlePrecioProducto cartTableCell col3">
+                <p id="producto-cantidad" style="display:inline">10</p>
+            </article>  
+            <article class="articlePrecioProducto cartTableCell col4">
+                <p style="display:inline">$</p>
+                <p id="producto-total" style="display:inline">10</p>
+            </article>                               
           </section>
     </main>
     <footer>
