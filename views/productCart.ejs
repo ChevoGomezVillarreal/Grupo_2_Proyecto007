@@ -2,6 +2,7 @@
 <html>
 <head>
         <%- include('./partials/head') %>
+        <script src="/js/productCart.js" type="text/javascript"></script>
 </head>
 <body>
     <header>
@@ -9,42 +10,53 @@
     </header>
     <main>
         <h1 class="headerDescripcionDelProducto headerPrincipal"><br>CARRITO DE COMPRAS<br><br></h1>
+        
         <section class="seccionCartHeader">
             <header class="col1">PRODUCTO</header>            
             <header class="col2">PRECIO</header>
             <header class="col3">CANTIDAD</header>
             <header class="col4">TOTAL</header>
         </section>
-        <section class="seccionCartL1">
-
-            <!--sección de descripción del producto-->
-            <section class="seccionDescripcionDelProducto cartTableCell col1">
-                <!--header para el nombre del producto-->
-              <header class="headerDescripcionDelProducto cartTableCellDescL1">
-                <p id="producto-nombre">
-                    PRODUCTO MUESTRA
-                </p>
-              </header>
-              <!--articulo para describir el producto-->
-              <article class="articuloDescripcionDelProducto">
-                <p id="producto-descripcion">
-                    DESCRIPCION MUESTRA
-                </p>
-              </article>
+        <div id="carritoContenedorProductos">
+            <% for(i=1;i<=20;i++) { %>
+                <% console.log('i = ' + i) %>
+            <section class="seccionCartL1" id="carrito-product-row-<%= i %>"
+                <% if(i==1) { %>
+                    <%=    "style=display:flex"   %>
+                    <% } else { %>
+                    <%=    "style=display:none"  %>
+                    <% } %>                
+                >
+                <!--sección de descripción del producto-->
+                <section class="seccionDescripcionDelProducto cartTableCell col1">
+                    <!--header para el nombre del producto-->
+                <header class="headerDescripcionDelProducto cartTableCellDescL1">
+                    <p id="producto-nombre-<%= i %>">
+                        PRODUCTO MUESTRA
+                    </p>
+                </header>
+                <!--articulo para describir el producto-->
+                <article class="articuloDescripcionDelProducto">
+                    <p id="producto-descripcion-<%= i %>">
+                        DESCRIPCION MUESTRA
+                    </p>
+                </article>
+                </section>
+                <!--Precion del producto-->
+                <article class="articlePrecioProducto cartTableCell col2">
+                    <p style="display:inline">$</p>
+                    <p id="producto-precio-<%= i %>" style="display:inline">123</p>
+                </article>    
+                <article class="articlePrecioProducto cartTableCell col3">
+                    <p id="producto-cantidad-<%= i %>" style="display:inline">10</p>
+                </article>  
+                <article class="articlePrecioProducto cartTableCell col4">
+                    <p style="display:inline">$</p>
+                    <p id="producto-total-<%= i %>" style="display:inline">10</p>
+                </article>                               
             </section>
-            <!--Precion del producto-->
-            <article class="articlePrecioProducto cartTableCell col2">
-                <p style="display:inline">$</p>
-                <p id="producto-precio" style="display:inline">123</p>
-            </article>    
-            <article class="articlePrecioProducto cartTableCell col3">
-                <p id="producto-cantidad" style="display:inline">10</p>
-            </article>  
-            <article class="articlePrecioProducto cartTableCell col4">
-                <p style="display:inline">$</p>
-                <p id="producto-total" style="display:inline">10</p>
-            </article>                               
-          </section>
+            <% } %>
+        </div>
     </main>
     <footer>
         <%- include('./partials/footer') %>
