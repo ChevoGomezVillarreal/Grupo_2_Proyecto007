@@ -129,7 +129,7 @@
 }
 
 .seccionDescripcionDelProducto {
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
 }
 
 .headerDescripcionDelProducto {
@@ -147,12 +147,12 @@
 
 .articlePrecioProducto {
   background-color: rgb(240, 240, 240);
-  height: 40px;
+  /*height: 40px;*/
   padding: 5px;
   font-size: 18px;
   text-align: center;
   font-weight: bold;
-  margin-top: 20px; 
+  /*margin-top: 20px; */
 }
 
 .seccionAdicionarATarjeta {

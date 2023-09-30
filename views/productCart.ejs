@@ -1,101 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <%- include('./partials/head') %>
-    <body>
+<head>
+        <%- include('./partials/head') %>
+</head>
+<body>
+    <header>
         <%- include('./partials/header') %>
-    <section class="section-body-cart">
-        <div class="cont-cart">
-            <div class="title">
-                <h2 class="text-title">Carro de compras</h2>
-            </div>
-            <div class="carrito" id="carrito">
-
-            </div>
-            <div class="cont-info-product-top">
-                <div class="second-title">
-                    <h3 class="text-second-title">Your items</h3>
-                </div>
-                <div class="cont-product">
-                    <div class="cont-info-product">
-                        <div class="cont-image">
-                            <img class="image" src="/images/productDetails/productDetailsSample1.webp" alt="">
-                        </div>
-                        <div class="text-info-right">
-                            <div>
-                                <h3 class="text-info margin-bottom">Product name: James Bond Spymaster pen</h3>
-                                <h3 class="text-info">Code: SKU 22307594</h3>
-                            </div>
-                            <div class="text-price-unit">
-                                <h3 class="text-info title-amount">Price:</h3>
-                                <h3 class="text-info">$<span id="price">20.00</span></h3>
-                            </div>
-                            <div class="text-amount">
-                                <h3 class="text-info title-amount">Quantity:</h3>
-                                <div class="button-min-max">
-                                    <button class="button-min" onclick="min()"><span class="text-info">-</span></button>
-                                    <span class="text-info" id="number">0</span>
-                                    <button class="button-max" onclick="max()"><span class="text-info">+</span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button id="but-agregar-a-carrito">AGREGAR A CARRITO</button>
-                        </div>
-                    </div>
-                    <div class="cont-summary-total">
-                        <h3 class="text-info">Order summary</h3>
-                        <div class="text-title-product">
-                            <h3 class="text-info">Products:</h3>
-                            <h3 class="text-info"><span id="number2">0</span></h3>
-                        </div>
-                        <div class="text-total-product">
-                            <h3 class="text-info">Total:</h3>
-                            <h3 class="text-info"><span id="total">0</span></h3>
-                        </div>
-                        <div class="cont-button-total">
-                            <button class="button-total">Continue shopping</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="frequently">
-                <div class="second-title">
-                    <h3 class="text-second-title">Frequently bought together</h3>
-                </div>
-                <div class="cont-cards">
-                    <div class="card1">
-                        <div class="cont-image-card">
-
-                            <img class="image-card" src="/images/productDetailsSample1.jpg" alt="">
-                        </div>
-                        <div class="text-card">
-                            <h3 class="text-1">Precio: <span>$25.00</span> </h3>
-                            <h4 class="text-1">Lapicero</h4>
-                        </div>
-                    </div>
-                    <div class="card2">
-                        <img class="image-card" src="/images/productDetailsSample1.jpg" alt="">
-                        <div class="text-card">
-                            <h3 class="text-1">Precio: <span>$25.00</span> </h3>
-                            <h4 class="text-1">Lapicero</h4>
-                        </div>
-                    </div>
-                    <div class="card3">
-                        <img class="image-card" src="/images/productDetailsSample1.jpg" alt="">
-                        <div class="text-card">
-                            <h3 class="text-1">Precio: <span>$25.00</span> </h3>
-                            <h4 class="text-1">Lapicero</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </header>
     <main>
-
+        <h1 class="headerDescripcionDelProducto headerPrincipal"><br>CARRITO DE COMPRAS<br><br></h1>
+        <section class="seccionCartL1">
+            <!--sección de descripción del producto-->
+            <section class="seccionDescripcionDelProducto cartTableCell cartTableCellDesc">
+                <!--header para el nombre del producto-->
+              <header class="headerDescripcionDelProducto">
+                <h1 id="producto-nombre">
+                    PRODUCTO MUESTRA
+                </h1>
+              </header>
+              <!--articulo para describir el producto-->
+              <article class="articuloDescripcionDelProducto">
+                <p id="producto-descripcion">
+                    DESCRIPCION MUESTRA
+                </p>
+              </article>
+            </section>
+            <!--Precion del producto-->
+            <article class="articlePrecioProducto cartTableCell cartTableCellPrecio">
+                <p style="display:inline">$</p>
+                <p id="producto-precio" style="display:inline">123</p>
+            </article>    
+            <article class="articlePrecioProducto cartTableCell cartTableCellPrecio">
+                <p style="display:block">Cant. </p>
+                <p id="producto-precio" style="display:inline">10</p>
+            </article>                     
+          </section>
     </main>
-    <%- include('./partials/footer') %>
+    <footer>
+        <%- include('./partials/footer') %>
+    </footer>
 </body>
 
 </html>
