@@ -16,6 +16,7 @@
             <header class="col2">PRECIO</header>
             <header class="col3">CANTIDAD</header>
             <header class="col4">TOTAL</header>
+            <header class="col5">ELIMINAR</header>
         </section>
         <div id="carritoContenedorProductos">
             <% for(i=1;i<=20;i++) { %>
@@ -30,17 +31,17 @@
                 <!--sección de descripción del producto-->
                 <section class="seccionDescripcionDelProducto cartTableCell col1">
                     <!--header para el nombre del producto-->
-                <header class="headerDescripcionDelProducto cartTableCellDescL1">
-                    <p id="producto-nombre-<%= i %>">
-                        PRODUCTO MUESTRA
-                    </p>
-                </header>
-                <!--articulo para describir el producto-->
-                <article class="articuloDescripcionDelProducto">
-                    <p id="producto-descripcion-<%= i %>">
-                        DESCRIPCION MUESTRA
-                    </p>
-                </article>
+                    <header class="headerDescripcionDelProducto cartTableCellDescL1">
+                        <p id="producto-nombre-<%= i %>">
+                            PRODUCTO MUESTRA
+                        </p>
+                    </header>
+                    <!--articulo para describir el producto-->
+                    <article class="articuloDescripcionDelProducto">
+                        <p id="producto-descripcion-<%= i %>">
+                            DESCRIPCION MUESTRA
+                        </p>
+                    </article>
                 </section>
                 <!--Precion del producto-->
                 <article class="articlePrecioProducto cartTableCell col2">
@@ -48,15 +49,34 @@
                     <p id="producto-precio-<%= i %>" style="display:inline">123</p>
                 </article>    
                 <article class="articlePrecioProducto cartTableCell col3">
-                    <p id="producto-cantidad-<%= i %>" style="display:inline">10</p>
+                    <p id="producto-cantidad-<%= i %>" style="display:inline">0</p>
                 </article>  
                 <article class="articlePrecioProducto cartTableCell col4">
                     <p style="display:inline">$</p>
-                    <p id="producto-total-<%= i %>" style="display:inline">10</p>
-                </article>                               
+                    <p id="producto-total-<%= i %>" style="display:inline">0</p>
+                </article> 
+                <article class="articlePrecioProducto cartTableCell col5">
+                    <button onclick="funEliminarArticulo(<%= i %>)">X</button>
+                </article>                                               
             </section>
             <% } %>
+            <div class="seccionCartL1" id="div-carrito-totales" style="justify-content: left;">
+                <!--header para el nombre del producto-->
+                <header class="headerDescripcionDelProducto cartTableCell" style="width:75%;text-align: right;">
+                    <p>
+                        TOTAL
+                    </p>
+                </header>
+                <!--articulo para describir el producto-->
+                <article class="headerDescripcionDelProducto cartTableCell col4">
+                    <p style="display:inline">$</p>
+                    <p id="div-carrito-totales-cantidad" style="display:inline">
+                        123
+                    </p>
+                </article>
+            </div>            
         </div>
+
     </main>
     <footer>
         <%- include('./partials/footer') %>

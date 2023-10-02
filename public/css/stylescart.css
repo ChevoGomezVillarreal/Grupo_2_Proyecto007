@@ -52,7 +52,7 @@
   }
 
   .col1 {
-    width: 55%;
+    width: 45%;
   }
 
   .col2 {
@@ -66,6 +66,10 @@
   .col4 {
     width: 15%;
   }
+
+  .col5 {
+    width: 10%;
+  }  
 
   @media screen (max-width:600px) {
   
