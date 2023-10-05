@@ -30,6 +30,7 @@ app.use(recordarMiddleware);
 //Requerir las rutas
 const rutasProductos = require('./routes/productos');
 const rutasUsuarios = require('./routes/usuarios');
+const rutasOrdenes = require('./routes/ordenes');
 const rutasMain = require("./routes/main");
 const cookieParser = require("cookie-parser");
 
@@ -38,6 +39,7 @@ const cookieParser = require("cookie-parser");
 app.use(rutasMain);
 app.use(rutasProductos);
 app.use(rutasUsuarios);
+app.use(rutasOrdenes);
 
 
 app.listen(3000, () => {

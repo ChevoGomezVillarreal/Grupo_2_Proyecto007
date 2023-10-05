@@ -70,7 +70,7 @@ module.exports = {
         console.log('nombre = ' + req.body.nombre);
         console.log('descripcion = ' + req.body.descripcion);
         console.log('costo = ' + req.body.costo);
-        
+        console.log('Body = ' + JSON.stringify(req.body));
         let prodImage = req.file ? req.file.filename : req.body.oldImage;
         console.log("Valor de req.body.imagenProducto = " + req.body.imagenProducto);
 

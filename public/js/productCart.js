@@ -1,41 +1,8 @@
 document.addEventListener('DOMContentLoaded',function(event){
+
     console.log('Entrando a productCart');
     let carrito = localStorage.getItem('carritoJson');
     console.log('Carrito JSON = ' + carrito);
-
-    let htmlCarritoProductRows = "<section class='seccionCartL1' id='carrito-product-row'>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<section class='seccionDescripcionDelProducto cartTableCell col1'>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<header class='headerDescripcionDelProducto cartTableCellDescL1'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p id='producto-nombre'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "PRODUCTO MUESTRA"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</header>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<article class='articuloDescripcionDelProducto'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p id='producto-descripcion'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "DESCRIPCION MUESTRA"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</article>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "</section>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<article class='articlePrecioProducto cartTableCell col2'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p style='display:inline'>$</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p id='producto-precio' style='display:inline'>123</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</article>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<article class='articlePrecioProducto cartTableCell col3'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p id='producto-cantidad' style='display:inline'>10</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</article>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "<article class='articlePrecioProducto cartTableCell col4'>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p style='display:inline'>$</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "<p id='producto-total' style='display:inline'>10</p>"
-    htmlCarritoProductRows = htmlCarritoProductRows & "</article>"
-
-    htmlCarritoProductRows = htmlCarritoProductRows & "</section>"
 
     if(carrito!=undefined){
         let carrito2 = '[' + localStorage.getItem('carritoJson') + ']';
@@ -52,27 +19,44 @@ document.addEventListener('DOMContentLoaded',function(event){
             carritoRow.style.display = 'flex';
 
             nombreID = 'producto-nombre-' + i;
+            nombreIDInput = 'input-' + nombreID;
             let carritoNombre = document.getElementById(nombreID);            
             carritoNombre.innerText = carritoJson[i-1].nombre;
+            document.getElementById(nombreIDInput).value = carritoJson[i-1].nombre;
 
             descID = 'producto-descripcion-' + i;
+            descIDInput = 'input-' + descID;
             let carritoDesc = document.getElementById(descID);            
             carritoDesc.innerText = carritoJson[i-1].descripcion;   
+            document.getElementById(descIDInput).value = carritoDesc.innerText;
             
             precioID = 'producto-precio-' + i;
+            precioIDInput = 'input-' + precioID;
             let carritoPrecio = document.getElementById(precioID);            
-            carritoPrecio.innerText = carritoJson[i-1].precio;               
+            carritoPrecio.innerText = carritoJson[i-1].precio;   
+            document.getElementById(precioIDInput).value = carritoPrecio.innerText;            
 
             cantidadID = 'producto-cantidad-' + i;
+            cantidadIDInput = 'input-' + cantidadID;
             let carritoCantidad = document.getElementById(cantidadID);            
             carritoCantidad.innerText = carritoJson[i-1].cantidad; 
+            document.getElementById(cantidadIDInput).value = carritoCantidad.innerText; 
 
             totalID = 'producto-total-' + i;
+            totalIDInput = 'input-' + totalID;
             let carritoTotal = document.getElementById(totalID);            
             carritoTotal.innerText = parseFloat(carritoJson[i-1].cantidad) * parseFloat(carritoJson[i-1].precio);             
             totalCant = totalCant + (parseFloat(carritoJson[i-1].cantidad) * parseFloat(carritoJson[i-1].precio));
+            document.getElementById(totalIDInput).value = carritoTotal.innerText; 
+            
+            prodId = 'producto-id-' + i;
+            prodIDInput = 'input-' + prodId;
+            let productoID = document.getElementById(prodId);            
+            productoID.innerText = carritoJson[i-1].id;    
+            document.getElementById(prodIDInput).value = productoID.innerText;        
         }
         carritoTotal.innerText = totalCant;
+        document.getElementById('input-div-carrito-totales-cantidad').value = carritoTotal.innerText;
     } else {
         console.log('Carrito no esta definido');
         rowNum = 'carrito-product-row-1';
@@ -104,6 +88,8 @@ function funEliminarArticulo(numArt){
     let carritoTotal;
     let varCantidad =0;
     let varTotal = 0;
+    //Sumo la cantidad monetaria de cada articulo en la orden, la columna TOTAL
+    //Checo cada linea de articulo en el carrito
     for( i = 1 ; i <= 20 ; i++ ){
         totalID = 'producto-total-' + (i);
         console.log('id de articulo analizado = ' + totalID);
@@ -124,6 +110,7 @@ function funEliminarArticulo(numArt){
 
     let nuevoArticulo = {};
 
+    //Reajusto el array que contiene los productos de la orden
     for( i = 1 ; i <= 20 ; i++ ){
         totalID = 'producto-total-' + (i);
         //console.log('id de articulo analizado = ' + totalID);
@@ -136,17 +123,23 @@ function funEliminarArticulo(numArt){
         prodPrecio = document.getElementById('producto-precio-' + i);
         prodCantidad = document.getElementById('producto-cantidad-' + i);
         prodTotal = document.getElementById('producto-total-' + i);        
+        prodId = document.getElementById('producto-id-' + i); 
         
         if(varCantidad == 0) {
+            //Las lineas de productos en la orden que su total es $0
+            //Las escondo
             articuloRow.style.display = 'none';  
         } else {
+            //Las que si contienen algo las asigno a un articulo nuevo
+            
             nuevoArticulo = {
-                id: "10",
+                id: prodId.innerText,
                 nombre: prodNombre.innerText,
                 descripcion: prodDescripcion.innerText,
                 precio: prodPrecio.innerText,
                 cantidad: prodCantidad.innerText
             };
+            //Despues agrego el nuevo articulo al array de productos
             carrito.push(JSON.stringify(nuevoArticulo));
 
         }
@@ -157,6 +150,8 @@ function funEliminarArticulo(numArt){
 
     let carrito2 = JSON.stringify(carrito);
     //carrito2 = carrito2.replace(/['"]+/g, '');
+
+    //Finalmente le asigno el nuevo array de productos a localStorage.carritoJson
     localStorage.setItem('carritoJson',carrito);
 
 }

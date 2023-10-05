@@ -51,6 +51,10 @@
 
   }
 
+  .cartTableCellInvisible {
+    display:none;
+  }
+
   .col1 {
     width: 45%;
   }
@@ -70,6 +74,16 @@
   .col5 {
     width: 10%;
   }  
+
+  .botonEliminar {
+    width:100%;
+    margin: 3px;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+  }
 
   @media screen (max-width:600px) {
   

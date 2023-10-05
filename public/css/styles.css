@@ -11,11 +11,12 @@ html {
     width:50%;
     margin: auto;
 }
-/*body {
-    max-width: 1080px;
+
+body {
+    max-width: 1200px;
     margin: auto;
     padding: 3vw;
-}*/
+}
 
 img {
     width:100%;
