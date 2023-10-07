@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/carrito', (req, res) => {
-    res.render('../views/productCart');
+    res.render('../views/productCart', {userData: req.session.usuarioLogueado});
 });
 
 router.get('/registro', (req, res) => {

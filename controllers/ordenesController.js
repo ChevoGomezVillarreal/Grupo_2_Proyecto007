@@ -16,27 +16,64 @@ module.exports = {
         console.log('Nombre de producto = ' + req.body['producto-nombre-1']);
         console.log('Body = ' + JSON.stringify(req.body,null,4));
         //console.log('ID del 1er articulo = ' + req.body.);
-        return res.json({requestBody: req.body});
+        //return res.json({requestBody: req.body});
 
-        db.Usuario
+        db.Orden
         .create(
             {
-                NOMBRE: req.body.nombre,
-                APELLIDO: req.body.apellido,
-                USUARIO: req.body.usuario,
-                EMAIL: req.body.email,
-                FECHA_NACIMIENTO: req.body.nacimiento,
-                DOMICILIO: req.body.domicilio,
-                PAIS: req.body.pais_nombre,   
-                PASSWORD1: passOriginal,
-                PASSWORD2: passControl,        
-                CATEGORIA: "general"             
+                id_cliente: req.body['orden-id-cliente'],
+                total: req.body['inputtotaldeorden'],
+                tipo_operacion: req.body['orden-tipo-operacion'],
+                email_cliente: req.body['orden-email-cliente'],
+                sub_total: req.body['orden-sub-total'],
+                impuestos: req.body['orden-impuestos'],
+                nombre_cliente: req.body['orden-nombre-cliente'],
+                apellido_cliente: req.body['orden-apellido-cliente'],
+                domicilio: req.body['orden-domicilio'],
+                usuario_cliente: req.body['orden-usuario'],
+                pais: req.body['orden-pais'],             
             }
         )
             .then((data2)=> {
-                //No estoy seguro si ya desde aqui hay que asignarle sesion al nuevo usuario
-                req.session.usuarioLogueado = usuarioARegistrar;
-                return res.redirect('/users/profile')
+                let cantArticulos = req.body['articulos-totales'];
+                let articulo;
+                let articuloString;
+                let articuloJson;
+                let arrayArticulos=[];
+                for(i=1; i <= cantArticulos ; i++) {
+                    articulo = {
+                        /*id_orden: req.body['orden-id-cliente'],*/
+                        num_articulo: i,
+                        id_articulo: req.body['producto-id-' + i],
+                        producto_nombre: req.body['producto-nombre-' + i],
+                        producto_descripcion: req.body['producto-descripcion-' + i],
+                        cantidad: req.body['producto-cantidad-' + i],
+                        precio: req.body['producto-precio-' + i],
+                        total: req.body['orden-id-cliente'],
+                    };
+                    articuloString = JSON.stringify(articulo);
+                    console.log('articuloString ' + i + ' = ' + articuloString);
+                    articuloJson = JSON.parse(articuloString);
+                    console.log('articulo convertido' + i + ' = ' + JSON.stringify(articuloJson,null,4));
+                    arrayArticulos.push(articulo);
+
+                }
+                console.log('array = ' + JSON.stringify(arrayArticulos,null,4));
+                
+                
+                db.Ordenarticulo
+                .bulkCreate(
+                    arrayArticulos
+                )
+                    .then((x)=>{
+                        return res.send('Operacion registrada');
+                    })
+                    .catch(error => res.send(error))
+                
+
+
+                
+
             })            
             .catch(error => res.send(error))                       
                 

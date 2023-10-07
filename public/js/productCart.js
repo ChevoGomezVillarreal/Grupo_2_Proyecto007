@@ -57,11 +57,14 @@ document.addEventListener('DOMContentLoaded',function(event){
         }
         carritoTotal.innerText = totalCant;
         document.getElementById('input-div-carrito-totales-cantidad').value = carritoTotal.innerText;
+        document.getElementById('articulos-totales').value = carritoJson.length;
+
     } else {
         console.log('Carrito no esta definido');
         rowNum = 'carrito-product-row-1';
         let carritoRow = document.getElementById(rowNum);
-        carritoRow.style.display = 'none';        
+        carritoRow.style.display = 'none';  
+        document.getElementById('articulos-totales').value = '0';      
     }
 
 

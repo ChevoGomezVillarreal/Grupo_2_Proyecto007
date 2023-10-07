@@ -86,8 +86,36 @@
                             123
                         </p>
                         <input id="input-div-carrito-totales-cantidad" name="inputtotaldeorden" class="cartTableCellInvisible">
+                        <input id="articulos-totales" name="articulos-totales">
                     </article>
                 </div> 
+                <% if(locals.userData && userData.NOMBRE) { %>
+                    <div>
+                        <input id="orden-id-cliente" name="orden-id-cliente" value="<%= userData.ID %>" />
+                        <input id="orden-tipo-operacion" name="orden-tipo-operacion" value="venta"/>
+                        <input id="orden-email-cliente" name="orden-email-cliente" value="<%= userData.EMAIL %>"/>
+                        <input id="orden-sub-total" name="orden-sub-total" value="0"/>
+                        <input id="orden-impuestos" name="orden-impuestos" value="0"/>
+                        <input id="orden-nombre-cliente" name="orden-nombre-cliente" value="<%= userData.NOMBRE %>"/>
+                        <input id="orden-apellido-cliente" name="orden-apellido-cliente" value="<%= userData.APELLIDO %>"/> 
+                        <input id="orden-domicilio" name="orden-domicilio" value="<%= userData.DOMICILIO %>"/>
+                        <input id="orden-usuario" name="orden-usuario" value ="<%= userData.USUARIO %>"/>
+                        <input id="orden-pais" name="orden-pais" value="<%= userData.PAIS %>"/>
+                    </div>
+                <% } else { %>
+                    <div>
+                        <input id="orden-id-cliente" name="orden-id-cliente" value="vacio" />
+                        <input id="orden-tipo-operacion" name="orden-tipo-operacion" value="vacio"/>
+                        <input id="orden-email-cliente" name="orden-email-cliente" value="vacio"/>
+                        <input id="orden-sub-total" name="orden-sub-total" value="vacio"/>
+                        <input id="orden-impuestos" name="orden-impuestos" value="vacio"/>
+                        <input id="orden-nombre-cliente" name="orden-nombre-cliente" value="vacio"/>
+                        <input id="orden-apellido-cliente" name="orden-apellido-cliente" value="vacio"/> 
+                        <input id="orden-domicilio" name="orden-domicilio" value="vacio"/>
+                        <input id="orden-usuario" name="orden-usuario" value ="vacio"/>
+                        <input id="orden-pais" name="orden-pais" value="vacio"/>
+                    </div>                    
+                <% } %>
                 <button type="submit" class="boton col4">COMPRAR 1</button>           
             </div>
 
