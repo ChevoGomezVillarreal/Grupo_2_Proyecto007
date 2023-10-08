@@ -38,7 +38,13 @@ module.exports = (sequelize,dataTypes)=>{
         },  
         pais: {
             type: dataTypes.STRING
-        }                                             
+        },
+        session_id: {
+            type: dataTypes.STRING
+        },  
+        orden_hora: {
+            type: dataTypes.STRING
+        }                                                             
     };
 
     let config = {

@@ -124,7 +124,9 @@ const usersController = {
 
     //seccion para hacer login - mostrar la vista
     login: function(req,res) {
+        
         if(req.session.usuarioLogueado) {
+        //if(req.cookies.recordar) {
             return res.render('profile', {userData: req.session.usuarioLogueado});
         } else {
             return res.render('login');
@@ -132,8 +134,9 @@ const usersController = {
     },
     //seccion para hacer login - cuando el usuario da click en LOGIN
     processLogin: function(req,res) {
+        console.log('INICIO---de ProcessLogin');
         let errors = validationResult(req);
-        console.log('INICIO---INICIO---INICIO');
+        
 
         //Checo si hay errores de validacion
         if (errors.isEmpty()){
@@ -143,6 +146,7 @@ const usersController = {
         } else {
             //Si SI hay errores le envio la descripcion del error
             //al usuario y hago return para salirme de este proceso
+            console.log('Entre a errores al ahcer processLogin');
             return res.render('login', {errors: errors.errors});
         }
 
@@ -161,10 +165,12 @@ const usersController = {
                 if(resUsuarios != undefined ){
                     //Si SI encuentro al usuario asigno el valor de lo encontrado en resUsuarios
                     //a la variable usuarioALoguearse
+                    /*
                     console.log('usuario si existe: ' + JSON.stringify(resUsuarios));
                     console.log('1 email = ' + resUsuarios.EMAIL);
                     console.log('1 usuario = ' + resUsuarios.USUARIO);
                     console.log('1 nombre = ' + resUsuarios.NOMBRE);                        
+                    */
                     //usuarioALoguearse = JSON.stringify(resUsuarios);
                     usuarioALoguearse = resUsuarios;
                     
@@ -185,21 +191,26 @@ const usersController = {
                     ]})
                 } else {
                     console.log('Usuario si esta definido');
+                    /*
                     console.log('2 email = ' + usuarioALoguearse.EMAIL);
                     console.log('2 usuario = ' + usuarioALoguearse.USUARIO);
                     console.log('2 nombre = ' + usuarioALoguearse.NOMBRE);
+                    */
                 }
 
                 req.session.usuarioLogueado = JSON.stringify(usuarioALoguearse);
                 console.log('req.session.usuarioLogueado = ' + req.session.usuarioLogueado);
                 req.session.usuarioLogueado = JSON.parse(req.session.usuarioLogueado);
+                /*
                 console.log('3 user ID = ' + req.session.usuarioLogueado.ID);
                 console.log('3 session email = ' + req.session.usuarioLogueado.EMAIL);
                 console.log('3 session usuario = ' + req.session.usuarioLogueado.USUARIO);
                 console.log('3 session nombre = ' + req.session.usuarioLogueado.NOMBRE);
+                */
 
                 if (req.body.recordar != undefined) {
-                    res.cookie('recordar', usuarioALoguearse.email, {maxAge: 600000});
+                    res.cookie('recordar', req.session.usuarioLogueado.EMAIL, {maxAge: 600000});
+                    console.log('Cookie recordar = ' + req.cookies.recordar);
                     console.log('El usuario SI sera recordado');
                 } else {
                     console.log('El usuario no quiere ser recordado');
@@ -211,6 +222,7 @@ const usersController = {
     },
 
     getProfile: function(req,res) {
+        console.log('Etnre a getProfile');
         res.render('profile',{userData: req.session.usuarioLogueado})
     },
 

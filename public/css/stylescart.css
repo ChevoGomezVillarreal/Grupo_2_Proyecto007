@@ -5,6 +5,11 @@
 
 }
 
+.max-width-800 {
+  max-width: 800px;
+  margin:auto;
+}
+
 /*Estilos sección de descrición y pagos del producto*/
 .seccionCartL1 {
     max-width: 800px;

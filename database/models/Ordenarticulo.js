@@ -29,7 +29,13 @@ module.exports = (sequelize,dataTypes)=>{
         },  
         total: {
             type: dataTypes.INTEGER
-        }                                          
+        },
+        session_id: {
+            type: dataTypes.STRING
+        },  
+        orden_hora: {
+            type: dataTypes.STRING
+        }                                                   
     };
 
     let config = {

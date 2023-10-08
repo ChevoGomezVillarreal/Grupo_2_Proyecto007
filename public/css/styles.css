@@ -46,6 +46,17 @@ a {
     text-decoration: none;
 }
 
+.boton {
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    /*
+    width: 200px;
+    */
+    background-color: black;
+    color: white;
+  }
+
 
 .main-nav {
     font-size: 12px;
@@ -86,7 +97,7 @@ a {
     padding: 10px;
 }
 
-.body-page-register input, button {
+.body-page-register input {
     width: 100%;
     padding:5px 10px;
     margin: 5px 10px;
@@ -94,7 +105,7 @@ a {
     
 }
 
-.body-page-login input, button, select {
+.body-page-login input, select {
     width: 100%;
     padding:5px 10px;
     margin: 5px 10px;
@@ -201,6 +212,15 @@ a {
     .ul-nodots {
         list-style: none;
     }
+}
+
+.visible {
+    display:block
+}
+
+.loged-user-header {
+
+    text-align: end;
 }
 
 

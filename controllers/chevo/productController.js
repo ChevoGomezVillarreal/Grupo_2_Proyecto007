@@ -33,7 +33,12 @@ module.exports = {
 
                 console.log('Productos = ' + JSON.stringify(productos));
                 console.log('Productos length = ' + productos.length);
-                res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario: productos});
+                res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), 
+                {inventario: productos,
+                userData: req.session.usuarioLogueado, 
+                sessionId: req.sessionID
+                }
+                );
             })       
 
 

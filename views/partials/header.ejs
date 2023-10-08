@@ -2,6 +2,21 @@
     <div class="div-mainlogo">
         <img src="/images/logo-2.png" alt="logo-2" class="img-mainlogo">
     </div>
+    <div class="loged-user-header
+        <% if(locals.userData && userData.NOMBRE) { %>
+             visible
+        <% } %>
+        ">
+        <% if(locals.userData && userData.NOMBRE) { %>
+            <p>Hola, <%= userData.NOMBRE %> </p>
+            <form action="/ordenes/listaCompras/<%= userData.ID %>" method="GET">
+                
+                <input name="header-user-id" value="<%= userData.ID %>" style="display:block" />
+                <button type="submit" class="boton">MIS COMPRAS</button>
+            </form>
+            <br>
+        <% } %>
+    </div>
     <div>
         <nav>
             <ul class="main-nav">
