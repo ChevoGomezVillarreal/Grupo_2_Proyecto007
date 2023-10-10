@@ -59,7 +59,7 @@ module.exports = (sequelize,dataTypes)=>{
 
     Orden.associate = function(models){
         
-        Orden.belongsTo(models.Ordenarticulo, { // models.Genre -> Genres es el valor de alias en genres.js
+        Orden.hasMany(models.Ordenarticulo, { // models.Genre -> Genres es el valor de alias en genres.js
             as: "articulos",
             foreignKey: "id_orden"
         })

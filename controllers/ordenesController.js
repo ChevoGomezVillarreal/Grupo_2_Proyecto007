@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
+const mysql = require('mysql2');
 
 const db = require('../database/models');
 const sequelize = db.sequelize;
@@ -133,15 +134,24 @@ const ordenesController = {
         //return res.send('SQL = ' + sqlInst);
         
 
-        bridge(sqlInst)
+        db.Orden.findAll({
+            where: {
+                id_cliente: req.params.id
+            },
+                include: ['articulos']
+            }
+
+        )
             .then(function(resultado){
-                console.log('Resultados promesa = ' + JSON.stringify(resultado));
-                return resultado;
+                console.log('Resultados promesa = ' + JSON.stringify(resultado,null,4));
+                return res.send(resultado);
             })
+            /*
             .then(function(data) {            
                 console.log('Datos = ' + JSON.stringify(data));
                 res.send('Datos = ' + JSON.stringify(data)); 
             }) 
+            */
             .catch(function(error){
                 console.log(error);
             })
@@ -150,7 +160,6 @@ const ordenesController = {
 
 // Insert records
 function updateDB(instruccion,next){
-    const mysql = require('mysql2');
 
     // create the connection to database
     const connection = mysql.createConnection({
@@ -179,13 +188,10 @@ function updateDB(instruccion,next){
 }
 
 
-function bridge(instruccion){
-    return readDB(instruccion);
-}
 //Get data from database
 // get the client
 function readDB(instruccion){
-    const mysql = require('mysql2');
+    
 
     // create the connection to database
     const connection = mysql.createConnection({
@@ -205,7 +211,7 @@ function readDB(instruccion){
             return 'updateDB = Error';
         } else {
             console.log('Results = ' + JSON.stringify(results,null,4));
-            return Promise.results;
+            return results;
         }
         //console.log(results); // results contains rows returned by server
         // console.log(fields); // fields contains extra meta data about results, if available

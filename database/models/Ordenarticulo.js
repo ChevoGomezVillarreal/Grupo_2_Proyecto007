@@ -49,7 +49,7 @@ module.exports = (sequelize,dataTypes)=>{
     const Ordenarticulo = sequelize.define(alias,cols,config);
 
     Ordenarticulo.associate = function(models) {
-        Ordenarticulo.hasMany(models.Orden, { // models.Movies -> Movie es el valor de alias en movie.js
+        Ordenarticulo.belongsTo(models.Orden, { // models.Movies -> Movie es el valor de alias en movie.js
             as: "ordenes", // El nombre del modelo pero en plural
             foreignKey: "id_orden"
         })
