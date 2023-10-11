@@ -24,13 +24,7 @@
             <div id="carritoContenedorProductos" class="max-width-800">
                 <% for(i=1;i<=20;i++) { %>
                     <% console.log('i = ' + i) %>
-                <section class="seccionCartL1" id="carrito-product-row-<%= i %>"
-                    <% if(i==1) { %>
-                        <%=    "style=display:flex"   %>
-                        <% } else { %>
-                        <%=    "style=display:none"  %>
-                        <% } %>                
-                    >
+                <section class="seccionCartL1" id="carrito-product-row-<%= i %>" style='display:none'> 
                     <!--sección de descripción del producto-->
                     <section class="seccionDescripcionDelProducto cartTableCell col1">
                         <!--header para el nombre del producto-->
@@ -64,7 +58,7 @@
                         <input id="input-producto-total-<%= i %>" name="producto-total-<%= i %>" class="cartTableCellInvisible">
                     </article> 
                     <article class="articlePrecioProducto cartTableCell col5">
-                        <button onclick="funEliminarArticulo(<%= i %>)" class="botonEliminar">X</button>
+                        <button type="button" onclick="funEliminarArticulo(<%= i %>)" class="botonEliminar">X</button>
                     </article>                                               
                     <article class="cartTableCellInvisible">
                         <p id="producto-id-<%= i %>">X</p>

@@ -76,8 +76,8 @@ const ordenesController = {
                     arrayArticulos
                 )
                     .then((x)=>{
-                        //return res.send('Operacion registrada');
-                        return res.redirect('/ordenes/listaCompras/' + req.body['orden-id-cliente']);
+                        return res.send('Operacion registrada');
+                        //return res.redirect('/ordenes/listaCompras/' + req.body['orden-id-cliente']);
                     })
                     .catch(error => res.send(error))
                 
