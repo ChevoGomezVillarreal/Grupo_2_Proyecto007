@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded',function(event){
 })
 
 function funEliminarArticulo(numArt){
+    
     console.log('Entre a eliminar articulo, el articulo a eliminar es el = ' + numArt);
     
     let articuloRow = document.getElementById('carrito-product-row-' + numArt);

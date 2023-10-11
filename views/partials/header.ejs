@@ -11,7 +11,7 @@
             <p>Hola, <%= userData.NOMBRE %> </p>
             <form action="/ordenes/listaCompras/<%= userData.ID %>" method="GET">
                 
-                <input name="header-user-id" value="<%= userData.ID %>" style="display:block" />
+                <input name="header-user-id" value="<%= userData.ID %>" style="display:none" />
                 <button type="submit" class="boton">MIS COMPRAS</button>
             </form>
             <br>

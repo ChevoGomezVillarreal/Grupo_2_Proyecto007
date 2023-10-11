@@ -57,7 +57,7 @@ const ordenesController = {
                         producto_descripcion: req.body['producto-descripcion-' + i],
                         cantidad: req.body['producto-cantidad-' + i],
                         precio: req.body['producto-precio-' + i],
-                        total: req.body['orden-id-cliente'],
+                        total: req.body['producto-total-' + i],
                         session_id: req.sessionID,
                         orden_hora: dateTime
                     };
@@ -76,7 +76,8 @@ const ordenesController = {
                     arrayArticulos
                 )
                     .then((x)=>{
-                        return res.send('Operacion registrada');
+                        //return res.send('Operacion registrada');
+                        return res.redirect('/ordenes/listaCompras/' + req.body['orden-id-cliente']);
                     })
                     .catch(error => res.send(error))
                 
@@ -144,14 +145,26 @@ const ordenesController = {
         )
             .then(function(resultado){
                 console.log('Resultados promesa = ' + JSON.stringify(resultado,null,4));
-                return res.send(resultado);
+
+                //return res.send(resultado);
+
+                let temp;
+                temp = JSON.stringify(resultado,null,4);
+                temp = JSON.parse(temp);
+                //return res.send(temp);
+
+                console.log('Cantidad de ordenes = ' + resultado.length);
+                for( i = 0 ; i < resultado.length ; i++){
+                    console.log('Articulos en la orden #' + i + ' = ' + resultado[i].articulos.length);
+                }
+
+                return res.render('listaCompras',{
+                    comprasData:resultado,
+                    userData: req.session.usuarioLogueado
+                });
+                //return res.render('listaCompras',JSON.stringify(resultado,null,4));
+                
             })
-            /*
-            .then(function(data) {            
-                console.log('Datos = ' + JSON.stringify(data));
-                res.send('Datos = ' + JSON.stringify(data)); 
-            }) 
-            */
             .catch(function(error){
                 console.log(error);
             })
@@ -184,7 +197,7 @@ function updateDB(instruccion,next){
         // console.log(fields); // fields contains extra meta data about results, if available
     }
     );
-    next();
+    //next();
 }
 
 

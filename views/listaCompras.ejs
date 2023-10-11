@@ -3,127 +3,70 @@
     <head>
         <%- include('./partials/head') %>
         <link rel="stylesheet" href="/css/stylescart.css" >
-        <script type="text/javascript" src="/js/productCart.js"></script>
     </head>
 <body>
-    
         <%- include('./partials/header') %>
-
     <main>
 
-        <h1 class="headerDescripcionDelProducto headerPrincipal"><br>CARRITO DE COMPRAS<br><br></h1>
+        <h1 class="headerDescripcionDelProducto headerPrincipal"><br>COMPRAS RECIENTES<br><br></h1>
         
-        <form action="/ordenes/procesarCompra" method="POST" enctype="application/x-www-form-urlencoded" id="formCarrito" >
-            <section class="seccionCartHeader">
-                <header class="col1">PRODUCTO</header>            
-                <header class="col2">PRECIO</header>
-                <header class="col3">CANTIDAD</header>
-                <header class="col4">TOTAL</header>
-                <!--<header class="col5">ELIMINAR</header>-->
-            </section>
-            <div id="carritoContenedorProductos" class="max-width-800">
-                <% for( i = 1 ; i <= 20 ; i++) { %>
-                    <% console.log('i = ' + i) %>
-                <section class="seccionCartL1" id="carrito-product-row-<%= i %>"
-                    <% if(i==1) { %>
-                        <%=    "style=display:flex"   %>
-                        <% } else { %>
-                        <%=    "style=display:none"  %>
-                        <% } %>                
-                    >
-                    <!--sección de descripción del producto-->
-                    <section class="seccionDescripcionDelProducto cartTableCell col1">
-                        <!--header para el nombre del producto-->
-                        <header class="headerDescripcionDelProducto cartTableCellDescL1">
-                            <p id="producto-nombre-<%= i %>">
-                                PRODUCTO MUESTRA
-                            </p>
-                            <input id="input-producto-nombre-<%= i %>" name="producto-nombre-<%= i %>" class="cartTableCellInvisible">
-                        </header>
-                        <!--articulo para describir el producto-->
-                        <article class="articuloDescripcionDelProducto">
-                            <p id="producto-descripcion-<%= i %>">
-                                DESCRIPCION MUESTRA
-                            </p>
-                            <input id="input-producto-descripcion-<%= i %>" name="producto-descripcion-<%= i %>" class="cartTableCellInvisible">
-                        </article>
-                    </section>
-                    <!--Precion del producto-->
-                    <article class="articlePrecioProducto cartTableCell col2">
-                        <p style="display:inline">$</p>
-                        <p id="producto-precio-<%= i %>" style="display:inline">123</p>
-                        <input id="input-producto-precio-<%= i %>" name="producto-precio-<%= i %>" class="cartTableCellInvisible">
-                    </article>    
-                    <article class="articlePrecioProducto cartTableCell col3">
-                        <p id="producto-cantidad-<%= i %>" style="display:inline">0</p>
-                        <input id="input-producto-cantidad-<%= i %>" name="producto-cantidad-<%= i %>" class="cartTableCellInvisible">
-                    </article>  
-                    <article class="articlePrecioProducto cartTableCell col4">
-                        <p style="display:inline">$</p>
-                        <p id="producto-total-<%= i %>" style="display:inline">0</p>
-                        <input id="input-producto-total-<%= i %>" name="producto-total-<%= i %>" class="cartTableCellInvisible">
-                    </article> 
-                    <article class="articlePrecioProducto cartTableCell col5">
-                        <button onclick="funEliminarArticulo(<%= i %>)" class="botonEliminar">X</button>
-                    </article>                                               
-                    <article class="cartTableCellInvisible">
-                        <p id="producto-id-<%= i %>">X</p>
-                        <input id="input-producto-id-<%= i %>" name="producto-id-<%= i %>" class="cartTableCellInvisible">
-                    </article>                 
+            <% for( i = 0 ; i < comprasData.length ; i++) { %>
+                <% console.log('Orden = ' + (i + 1)) %>
+            <hr>
+            <div class="mostradorOrden" id="mostrador-orden-<%= i %>">
+                <section class="seccionCartHeader">
+                    <header class="col1">PRODUCTO</header>            
+                    <header class="col2">PRECIO</header>
+                    <header class="col3">CANTIDAD</header>
+                    <header class="col4">TOTAL</header>
+                    <!--<header class="col5">ELIMINAR</header>-->
                 </section>
-                <% } %>
-                <div class="seccionCartL1" id="div-carrito-totales" style="justify-content: left;">
-                    <!--header para el nombre del producto-->
-                    <header class="headerDescripcionDelProducto cartTableCell" style="width:75%;text-align: right;">
-                        <p>
-                            TOTAL
-                        </p>
-                        
-                    </header>
-                    <!--articulo para describir el producto-->
-                    <article class="headerDescripcionDelProducto cartTableCell col4">
-                        <p style="display:inline">$</p>
-                        <p id="div-carrito-totales-cantidad" style="display:inline">
-                            123
-                        </p>
-                        <input id="input-div-carrito-totales-cantidad" name="inputtotaldeorden" class="cartTableCellInvisible">
-                        <input id="articulos-totales" name="articulos-totales" class="cartTableCellInvisible">
-                    </article>
-                </div> 
-                <% if(locals.userData && userData.NOMBRE) { %>
-                    <div class="cartTableCellInvisible">
-                        <input id="orden-id-cliente" name="orden-id-cliente" value="<%= userData.ID %>" />
-                        <input id="orden-tipo-operacion" name="orden-tipo-operacion" value="venta"/>
-                        <input id="orden-email-cliente" name="orden-email-cliente" value="<%= userData.EMAIL %>"/>
-                        <input id="orden-sub-total" name="orden-sub-total" value="0"/>
-                        <input id="orden-impuestos" name="orden-impuestos" value="0"/>
-                        <input id="orden-nombre-cliente" name="orden-nombre-cliente" value="<%= userData.NOMBRE %>"/>
-                        <input id="orden-apellido-cliente" name="orden-apellido-cliente" value="<%= userData.APELLIDO %>"/> 
-                        <input id="orden-domicilio" name="orden-domicilio" value="<%= userData.DOMICILIO %>"/>
-                        <input id="orden-usuario" name="orden-usuario" value ="<%= userData.USUARIO %>"/>
-                        <input id="orden-pais" name="orden-pais" value="<%= userData.PAIS %>"/>
-                        <input id="orden-session-id" name="orden-session-id" value="<%= sessionId %>"/>
-                    </div>
-                <% } else { %>
-                    <div class="cartTableCellInvisible">
-                        <input id="orden-id-cliente" name="orden-id-cliente" value="vacio" />
-                        <input id="orden-tipo-operacion" name="orden-tipo-operacion" value="vacio"/>
-                        <input id="orden-email-cliente" name="orden-email-cliente" value="vacio"/>
-                        <input id="orden-sub-total" name="orden-sub-total" value="vacio"/>
-                        <input id="orden-impuestos" name="orden-impuestos" value="vacio"/>
-                        <input id="orden-nombre-cliente" name="orden-nombre-cliente" value="vacio"/>
-                        <input id="orden-apellido-cliente" name="orden-apellido-cliente" value="vacio"/> 
-                        <input id="orden-domicilio" name="orden-domicilio" value="vacio"/>
-                        <input id="orden-usuario" name="orden-usuario" value ="vacio"/>
-                        <input id="orden-pais" name="orden-pais" value="vacio"/>
-                        <input id="orden-session-id" name="orden-session-id" value="vacio"/>
-                    </div>                    
-                <% } %>
-                <br>
-          
-            </div>
 
-        </form>
+                
+                <div id="carritoContenedorProductos" class="max-width-800">
+                    <% for (b = 0 ; b < comprasData[i].articulos.length ; b++) { %>
+                    <section class="seccionCartL1" id="carrito-product-row-<%= b + 1 %>">
+                        <!--sección de descripción del producto-->
+                        <section class="seccionDescripcionDelProducto cartTableCell col1">
+                            <!--header para el nombre del producto-->
+                            <header class="headerDescripcionDelProducto cartTableCellDescL1">
+                                <p id="producto-nombre-<%= b + 1 %>">
+                                    <%= comprasData[i].articulos[b].producto_nombre %>
+                                </p>
+                            </header>
+                            <!--articulo para describir el producto-->
+                            <article class="articuloDescripcionDelProducto">
+                                <p id="producto-descripcion-<%= b %>">
+                                    <%= comprasData[i].articulos[b].producto_descripcion %>
+                                </p>
+                            </article>
+                        </section>
+                        <!--Precios y cantidades compradas del producto-->
+                        <article class="articlePrecioProducto cartTableCell col2">
+                            <p style="display:inline">$</p>
+                            <p id="producto-precio-<%= b %>" style="display:inline">
+                                <%= comprasData[i].articulos[b].precio %>
+                            </p>
+                        </article>    
+                        <article class="articlePrecioProducto cartTableCell col3">
+                            <p id="producto-cantidad-<%= b %>" style="display:inline">
+                                <%= comprasData[i].articulos[b].cantidad %>
+                            </p>
+                        </article>  
+                        <article class="articlePrecioProducto cartTableCell col4">
+                            <p style="display:inline">$</p>
+                            <p id="producto-total-<%= b %>" style="display:inline">
+                                <%= comprasData[i].articulos[b].total %>
+                            </p>
+                        </article> 
+               
+                    </section>
+                    <br>
+                    <br>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
     </main>
     <footer>
         <%- include('./partials/footer') %>
