@@ -9,7 +9,7 @@ const ordenesController = require('../controllers/ordenesController.js');
 /** Ordenes de compra **/
 
 router.post('/ordenes/procesarCompra',  ordenesController.saveNew);
-router.get('/ordenes/listaCompras/:id',  ordenesController.listaCompras);
+router.get('/ordenes/listaCompras',  ordenesController.listaCompras);
 
 
 module.exports = router;

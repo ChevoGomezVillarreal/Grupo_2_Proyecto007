@@ -92,23 +92,27 @@ function funEliminarArticulo(numArt){
     let carritoTotal;
     let varCantidad =0;
     let varTotal = 0;
+    let canTotArticulos=0; //la cantidad total de articulos en la orden
     //Sumo la cantidad monetaria de cada articulo en la orden, la columna TOTAL
     //Checo cada linea de articulo en el carrito
     for( i = 1 ; i <= 20 ; i++ ){
         totalID = 'producto-total-' + (i);
-        console.log('id de articulo analizado = ' + totalID);
+        //console.log('id de articulo analizado = ' + totalID);
         carritoTotal = document.getElementById(totalID);
         varCantidad = parseFloat(carritoTotal.innerText); 
         console.log('Cantidad a sumar = ' + varCantidad);  
         articuloRow = document.getElementById('carrito-product-row-' + i);
         if(articuloRow.style.display != 'none') {
-            varTotal = varTotal + varCantidad;  
+            varTotal = varTotal + varCantidad; 
+            
         }
-        console.log('Cantidad total sumada = ' + varTotal);   
+        //console.log('Cantidad total sumada = ' + varTotal);   
     }
     
     let totalText = document.getElementById('div-carrito-totales-cantidad');
     totalText.innerText = varTotal;
+
+
 
     let carrito=[];
 
@@ -143,14 +147,19 @@ function funEliminarArticulo(numArt){
                 precio: prodPrecio.innerText,
                 cantidad: prodCantidad.innerText
             };
+            canTotArticulos =  canTotArticulos + 1;
             //Despues agrego el nuevo articulo al array de productos
             carrito.push(JSON.stringify(nuevoArticulo));
 
         }
   
     }
-    console.log('El nuevo JSON es = :');
-    console.log(carrito); 
+    //console.log('El nuevo JSON es = :');
+    //console.log(carrito); 
+    console.log('Cantidad de articulos = ' + canTotArticulos) ; 
+    let canTotArticulosTxt = document.getElementById('articulos-totales');
+    canTotArticulosTxt.innerText = canTotArticulos; 
+    document.getElementById('articulos-totales').value = canTotArticulos;
 
     let carrito2 = JSON.stringify(carrito);
     //carrito2 = carrito2.replace(/['"]+/g, '');

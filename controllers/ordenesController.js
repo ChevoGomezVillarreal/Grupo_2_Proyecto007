@@ -23,6 +23,11 @@ const ordenesController = {
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         let dateTime = date + ' ' + time;
+        let cantArticulos = req.body['articulos-totales'];
+
+        if(cantArticulos==0){
+            return res.send('No hay articulos que comprar, por favor regrese a la pagina anterior');
+        }
 
         db.Orden
         .create(
@@ -43,7 +48,7 @@ const ordenesController = {
             }
         )
             .then((data2)=> {
-                let cantArticulos = req.body['articulos-totales'];
+                
                 let articulo;
                 let articuloString;
                 let articuloJson;
@@ -76,7 +81,7 @@ const ordenesController = {
                     arrayArticulos
                 )
                     .then((x)=>{
-                        return res.send('Operacion registrada');
+                        return res.render('operacionRegistrada');
                         //return res.redirect('/ordenes/listaCompras/' + req.body['orden-id-cliente']);
                     })
                     .catch(error => res.send(error))
@@ -123,13 +128,14 @@ const ordenesController = {
     },
 
     listaCompras: function(req,res, next){
-
+        console.log('req.session.usuarioLogueado.ID = ', req.session.usuarioLogueado.ID);
+        let idUsuario = req.session.usuarioLogueado.ID;
         let sqlInst = "SELECT o.id_orden,  o.nombre_cliente, o.apellido_cliente, o.total, ";
         sqlInst = sqlInst + " a.producto_nombre, a.producto_descripcion, a.cantidad FROM ";
         sqlInst = sqlInst + " (SELECT * FROM ordenes) as o, ";
         sqlInst = sqlInst + " (SELECT * FROM ordenes_articulos) as a ";
         sqlInst = sqlInst + " WHERE o.id_orden = a.id_orden ";
-        sqlInst = sqlInst + " AND id_cliente = " + req.params.id;
+        sqlInst = sqlInst + " AND id_cliente = " + idUsuario;
         console.log('sqlInst = ' + sqlInst);
 
         //return res.send('SQL = ' + sqlInst);
@@ -137,7 +143,7 @@ const ordenesController = {
 
         db.Orden.findAll({
             where: {
-                id_cliente: req.params.id
+                id_cliente: idUsuario
             },
                 include: ['articulos']
             }
