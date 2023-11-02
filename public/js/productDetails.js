@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded',function(event){
             let temp = "[" + localStorage.getItem('carritoJson') + "]";
             let temp2 = JSON.parse(temp);
             console.log(temp2);
+            let confirmaCarrito = document.querySelector('#lbl-confirma-agregar-carrito');
+            confirmaCarrito.innerText = "Articulo agregado al carrito";
           
         } else {
             console.log('Estoy entrando a carrito vacio');
@@ -59,7 +61,9 @@ document.addEventListener('DOMContentLoaded',function(event){
             //carrito2 = carrito2.replace(/['"]+/g, '');
 
             localStorage.setItem('carritoJson',carrito2);
-            console.log('localStorage carritoJson = ' + localStorage.getItem('carritoJson'))
+            console.log('localStorage carritoJson = ' + localStorage.getItem('carritoJson'));
+            let confirmaCarrito = document.querySelector('#lbl-confirma-agregar-carrito');
+            confirmaCarrito.innerText = "Articulo agregado al carrito";            
         }       
     })
 

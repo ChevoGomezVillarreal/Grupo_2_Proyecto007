@@ -2,21 +2,19 @@
 <html>
     <head>
         <%- include('./partials/head') %>
+        <link rel="stylesheet" href="/css/stylesProductCatalog.css">
     </head>
     
     <%- include('./partials/header') %>
     
     <body class="body-page-login">
-        <div class="">
-            <h1>Operacion Registrada</h1>
-            <p>Gracias por su compra</p>
+        <div class="div-center">
+            <h1> <%= mensaje %></h1>
             <br><br>
             <p>Oprima el siguiente boton para regresar</p>
-            <a href="/products">
+            <a href="<%=  returnLink  %>">
                 <button>REGRESAR</button>
-            </a>        
+            </a>
         </div>
-        <script src="/js/borrarCarrito.js"></script>
-
     </body>
 </html>

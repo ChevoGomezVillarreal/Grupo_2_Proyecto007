@@ -33,7 +33,48 @@ module.exports = {
 
                 console.log('Productos = ' + JSON.stringify(productos));
                 console.log('Productos length = ' + productos.length);
-                res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), 
+                //res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), 
+                res.render(path.resolve(__dirname,"../../views/productCatalog.ejs"),
+                {inventario: productos,
+                userData: req.session.usuarioLogueado, 
+                sessionId: req.sessionID
+                }
+                );
+            })       
+    },
+  
+    crud: (req, res)=>{
+        /*
+        let inventario = fs.readFileSync(path.resolve(__dirname,'../../database/productos.json'));
+        inventario = JSON.parse(inventario);
+        */
+        console.log("Vista de CRUD");
+
+        if(req.session.usuarioLogueado == undefined){
+            return res.render(path.resolve(__dirname,"../../views/centroMensajes.ejs"),
+            {   
+                mensaje: "Primero tiene que registrarse para ver esta seccion",
+                returnLink: "/"
+            }           
+            );
+        } else if(req.session.usuarioLogueado.CATEGORIA != "admin"){
+            console.log('categoria = ' + req.session.usuarioLogueado.CATEGORIA);
+            return res.render(path.resolve(__dirname,"../../views/centroMensajes.ejs"),
+            {   
+                mensaje: "Usted no tiene permiso para ver esta seccion",
+                returnLink: "/"
+            }           
+            );
+        }
+
+        Productos.findAll()
+            .then(productos => {
+                //res.render('moviesList.ejs', {productos})
+
+                console.log('Productos = ' + JSON.stringify(productos));
+                console.log('Productos length = ' + productos.length);
+                //res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), 
+                res.render(path.resolve(__dirname,"../../views/productIndex.ejs"),
                 {inventario: productos,
                 userData: req.session.usuarioLogueado, 
                 sessionId: req.sessionID
@@ -41,23 +82,7 @@ module.exports = {
                 );
             })       
 
-
-        /*
-        let counter = 0;
-        inventario.forEach(element => {
-            counter++;
-            console.log("Estoy imprimiendo un objeto. El ciclo es: " + counter);
-            console.log("El ID es: " + element.id);
-            console.log("El nombre es: " + element.name);
-            console.log("La descripcion es: " + element.description);
-            console.log("La imagen es: " + element.image);
-            console.log("El precio es: " + element.price + "\n");
-        });
-        */
-        //console.log(inventario);
-        //res.render(path.resolve(__dirname,"../../views/productIndex.ejs"), {inventario});
-
-    },
+    },    
 
     create: (req, res) => {
         res.render(path.resolve(__dirname,"../../views/productCreate.ejs"));

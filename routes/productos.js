@@ -4,10 +4,12 @@ const path = require('path');
 const multer = require("multer");
 const { check, validationResult, body } = require('express-validator');
 
-const currentPath = path.resolve(__dirname,'../controllers/chevo/productController.js');
+//const currentPath = path.resolve(__dirname,'../controllers/chevo/productController.js');
+const currentPath = require('../controllers/chevo/productController.js');
 
-const controllersAdminProdChevo = require(currentPath);
-const productController = require(path.resolve(__dirname,'../controllers/mauricio/productController'));
+const controllersAdminProdChevo = require('../controllers/chevo/productController.js');
+//const productController = require(path.resolve(__dirname,'../controllers/mauricio/productController'));
+const productController = require('../controllers/mauricio/productController.js');
 
 const validaciones = [
     body('nombre').notEmpty().withMessage('El nombre no puede estar vacio'),
@@ -35,6 +37,7 @@ const uploadFile = multer({ storage: multerDiskStorage });
 
 /** Chevo **/
 router.get('/products', controllersAdminProdChevo.index);
+router.get('/products/crud', controllersAdminProdChevo.crud);
 router.get('/products/create', controllersAdminProdChevo.create);
 router.post('/products/savenew',  uploadFile.single("imagenProducto"), controllersAdminProdChevo.savenew);
 //router.get('/products/:id', controllersAdminProdChevo.show);

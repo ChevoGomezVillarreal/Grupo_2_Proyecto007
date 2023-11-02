@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded',function(event){
         let carritoRow = document.getElementById(rowNum);
         carritoRow.style.display = 'none';  
         document.getElementById('articulos-totales').value = '0';      
+        document.getElementById('div-carrito-totales-cantidad').innerText = '0';
     }
 
 

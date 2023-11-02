@@ -25,8 +25,22 @@ const ordenesController = {
         let dateTime = date + ' ' + time;
         let cantArticulos = req.body['articulos-totales'];
 
+        if(req.session.usuarioLogueado == undefined){
+            return res.render(path.resolve(__dirname,"../views/centroMensajes.ejs"),
+            {   
+                mensaje: "Primero tiene que registrarse para poder hacer alguna compra",
+                returnLink: "/carrito"
+            }           
+            );
+        }
+
         if(cantArticulos==0){
-            return res.send('No hay articulos que comprar, por favor regrese a la pagina anterior');
+            return res.render(path.resolve(__dirname,"../views/centroMensajes.ejs"),
+            {   
+                mensaje: "No hay articulos que comprar, agregue minimo 1 articulo a su carrito",
+                returnLink: "/carrito"
+            }           
+            );
         }
 
         db.Orden
@@ -81,8 +95,12 @@ const ordenesController = {
                     arrayArticulos
                 )
                     .then((x)=>{
-                        return res.render('operacionRegistrada');
-                        //return res.redirect('/ordenes/listaCompras/' + req.body['orden-id-cliente']);
+                        return res.render(path.resolve(__dirname,"../views/operacionRegistrada.ejs"),
+                        {   
+                            mensaje: "Operacion registrada, gracias por su compra.",
+                            returnLink: "/"
+                        }           
+                        );
                     })
                     .catch(error => res.send(error))
                 
@@ -128,6 +146,16 @@ const ordenesController = {
     },
 
     listaCompras: function(req,res, next){
+
+        if(req.session.usuarioLogueado == undefined){
+            return res.render(path.resolve(__dirname,"../views/centroMensajes.ejs"),
+            {   
+                mensaje: "Primero tiene que registrarse para ver esta seccion",
+                returnLink: "/products"
+            }           
+            );
+        } 
+
         console.log('req.session.usuarioLogueado.ID = ', req.session.usuarioLogueado.ID);
         let idUsuario = req.session.usuarioLogueado.ID;
         let sqlInst = "SELECT o.id_orden,  o.nombre_cliente, o.apellido_cliente, o.total, ";
@@ -146,6 +174,8 @@ const ordenesController = {
                 id_cliente: idUsuario
             },
                 include: ['articulos']
+            ,
+            order: [['created_at', 'DESC']]
             }
 
         )

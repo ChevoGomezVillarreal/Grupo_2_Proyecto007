@@ -4,6 +4,7 @@
 <html>
   <head>
     <%- include('./partials/head') %>
+    <script type="text/javascript" src="/js/imagePreview.js"></script>
   </head>
   <body>
     <%- include('./partials/header') %>
@@ -23,10 +24,9 @@
             <input type="number" name="price" class="formProductCreateEditTextInput" placeholder="Precio del producto"
                 value="<%= producto.PRECIO %>"> 
             
-            <img src="/images/productos/<%= producto.IMAGEN %>" alt="<%= producto.NOMBRE %>"/>
+            <img src="/images/productos/<%= producto.IMAGEN %>" id="image-display" alt="<%= producto.NOMBRE %>"/>
             <input type="hidden" name="oldImage" value="<%= producto.IMAGEN %>">
             <input type="file" name="imagenProducto" id="image" class="formProductCreateEditTextInput" value="<%= producto.IMAGEN %>" >
-           
             <br>            
             <br>                
             <button type="submit">Guardar</button><br>            

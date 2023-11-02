@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+  <head>
+      <%- include('./partials/head') %>
+      <link rel="stylesheet" href="/css/stylesProductDetails.css">
+      <link rel="stylesheet" href="/css/stylesProductCatalog.css">
+      <!--<script src="/js/productDetails.js" type="text/javascript"></script>-->
+  </head>
+  <body>
+    <%- include('./partials/header') %>
+      <main class="main">
+        <% let varHref = '' %>
+        <% for(let i=0; i < inventario.length; i++) { %>        
+        <!--sección general del producto-->
+        <section class="seccionGeneralProducto">
+          <!--sección imágenes del producto-->
+          <section class="seccionImagenesDelProducto">
+            <!--Sección imagen grande del producto-->
+            <section class="seccionImagenPrincipalProducto">
+              <div class="divLeftArrowArticuloImagenPrincipalProducto">
+                <i class="fa-regular fa-square-caret-left iconoFlecha"></i>
+              </div>
+              <img src="/images/productos/<%= inventario[i].IMAGEN %>" class="imagenPrincipalDelProducto" />
+              <div class="divRightArrowArticuloImagenPrincipalProducto">
+                <i class="fa-regular fa-square-caret-right iconoFlecha"></i>
+              </div>
+            </section>
+
+          </section>
+          <!--sección descripción y add to cart del producto-->
+          <section class="seccionDescripcionYAddToCartDelPropducto">
+            <!--sección de descripción del producto-->
+            <section class="seccionDescripcionDelProducto">
+              <header class="headerDescripcionDelProducto">
+                <h1 id="producto-nombre">
+                  <%= inventario[i].NOMBRE %>
+                </h1>
+              </header>
+              <!--articulo para describir el producto-->
+              <article class="articuloDescripcionDelProducto">
+                <p id="producto-descripcion">
+                  <% if (inventario[i].DESCRIPCION !==null) {%>
+                    <%= inventario[i].DESCRIPCION %>
+                      <% }else{ %>
+                        "Descripción del producto ...";
+                        <% } %>
+                </p>
+              </article>
+              <!--Precion del producto-->
+              <article class="articlePrecioProducto">
+                <p style="display:inline">$</p><p id="producto-precio" style="display:inline"><%= inventario[i].PRECIO %> </p>
+              </article>
+            </section>
+            <!--sección de adicionar a tarjeta-->
+            <a href="<%= '/products/' + inventario[i].ID %>" style="margin:auto;margin-top: 10px;margin-bottom: 10px;">
+                <button CLASS="boton">VER PRODUCTO</button>
+            </a>
+            <section class="seccionAdicionarATarjeta" style="display:none">
+                <article class="articuloAdicionarATarjeta">
+                    <button class="botonAddToCart" id="boton-restar">-</button>
+                    <input size="15" id="producto-cantidad" value="1" type="number"/>
+                    <button class="botonAddToCart" id="boton-sumar">+</button>
+                </article>
+                <article class="articuloAdicionarATarjeta">
+                    <button class="boton" id="but-add-art">ADD TO CART</button>
+                    <form action="/carrito" method="GET">
+                    <button type="submit" class="boton" id="but-carrito">VIEW CART</button>
+                    </form>
+                </article>
+                <div style="display:none">
+                    <input type="text" value="<%= inventario[i].ID %>" id="producto-id"></input>
+                </div>
+            </section>
+          </section>
+        </section>
+        <% } %>
+    </main>
+    <%- include('./partials/footer') %>
+    <p style="text-align:left">Copyright &copy; 2023 Convenciones Internacionales S.R.L.</p>
+
+  </body>
+
+
+</html>
